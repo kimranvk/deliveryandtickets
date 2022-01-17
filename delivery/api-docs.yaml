@@ -1,0 +1,64 @@
+openapi: 3.0.1
+info:
+  title: Delivery
+  description: Assignment
+  termsOfService: Please adhere to policies
+  version: "1.0"
+servers:
+- url: "http://localhost:8080/app"
+  description: Generated server url
+paths:
+  /deliveries:
+    get:
+      tags:
+      - delivery-resource
+      operationId: retrieveAllDeliveries
+      responses:
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Delivery"
+  /cache:
+    get:
+      tags:
+      - delivery-resource
+      operationId: retrieveAllRedis
+      responses:
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+components:
+  schemas:
+    Delivery:
+      type: object
+      properties:
+        deliveryId:
+          type: integer
+          format: int64
+        customerType:
+          type: string
+        deliveryStatus:
+          type: string
+        expectedDeliveryTime:
+          type: string
+          format: date-time
+        currentDistanceFromDestinationInMeters:
+          type: integer
+          format: int64
+        timeToReachDestination:
+          type: string
+          format: date-time
+        meanTimeToPrepareMins:
+          type: integer
+          format: int64
+        priority:
+          type: string
