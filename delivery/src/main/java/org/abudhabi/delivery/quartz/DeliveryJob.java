@@ -4,6 +4,8 @@ import org.abudhabi.delivery.service.DeliveryService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.quartz.SimpleTrigger;
+import org.quartz.Trigger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,13 @@ public class DeliveryJob implements Job {
 	@Override
 	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 		logger.info("starting quartz job: DeliveryJob");
-		deliveryService.startInterval(-1);
+	    Long repeatInterval = null;
+	    Trigger trigger = jobExecutionContext.getTrigger();
+	    if (trigger instanceof SimpleTrigger)
+	    {
+	        repeatInterval = ((SimpleTrigger)trigger).getRepeatInterval();
+	    }
+		deliveryService.startInterval(repeatInterval/1000);
 		logger.info("Deligated to service layer: DeliveryJob");
 	}
 

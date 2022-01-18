@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.abudhabi.delivery.beans.Delivery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import redis.clients.jedis.Jedis;
 
 @Service
+@Scope("singleton") 
 public class CollectionService implements ICollectionService {
 	private static final Logger logger = LoggerFactory.getLogger(CollectionService.class);
 	@Value("${jedis.host}")
@@ -22,6 +26,11 @@ public class CollectionService implements ICollectionService {
 	@Value("${app.key}")
 	private String key;
 
+	@PostConstruct
+	public void init() {
+	   key = key + System.currentTimeMillis();
+	}
+	
 	private Jedis connect() {
 		if(logger.isDebugEnabled()) {
 			logger.debug("starts connecting....host:{}, port:{}", host, port);
@@ -61,7 +70,7 @@ public class CollectionService implements ICollectionService {
 		}
 		// expiry
 		if (expiryInSeconds > 0l) {
-			jedis.expire(key, 1l);
+			jedis.expire(key, expiryInSeconds);
 		}
 		disconnect(jedis);
 	}

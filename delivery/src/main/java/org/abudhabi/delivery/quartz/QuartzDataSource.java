@@ -21,7 +21,7 @@ public class QuartzDataSource {
 	@Bean
 	public DataSource dataSource() {
 		JdbcDataSource ds = new JdbcDataSource();
-		String url = "jdbc:h2:" + System.getProperty("java.io.tmpdir") + "/datasource/" + h2DirectoryName + "/test";
+		String url = "jdbc:h2:" + System.getProperty("java.io.tmpdir") + "/datasource/" + h2DirectoryName + System.currentTimeMillis()+ "/test";
 		ds.setURL(url);
 		logger.debug("H2 URL:{}", url);
 		return ds;
