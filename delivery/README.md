@@ -44,7 +44,7 @@ docker build . --tag delivery-app
 
 docker run -it -p8080:8080 delivery-app:latest 
 
-RADIS
+REDIS
 =====
 KEYS *
 
