@@ -18,7 +18,7 @@ restart radis service
 =====================
 
 sudo service redis-server restart
-
+CONFIG SET "bind" "0.0.0.0 -::1"
 
 Run from Docker
 ===============
