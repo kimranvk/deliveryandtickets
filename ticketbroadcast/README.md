@@ -14,11 +14,11 @@ Run from terminal
 =================
 java -jar tickets-1.0.jar --jedis.host=192.168.0.143 --spring.profiles.active=dev
 
-restart radis service
+restart redis service
 =====================
 
 sudo service redis-server restart
-
+CONFIG SET "bind" "0.0.0.0 -::1"
 
 Run from Docker
 ===============
