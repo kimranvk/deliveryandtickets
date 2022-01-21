@@ -54,5 +54,10 @@ sort tickets_1 alpha desc
 
 rpush tickets_1 "asdfasffasd"
 
- redis-cli KEYS "tickets_*" | xargs redis-cli DEL
- redis-cli
+redis-cli KEYS "tickets_*" | xargs redis-cli DEL
+redis-cli
+ 
+ 
+Authentication
+==============
+admin/admin

@@ -28,4 +28,6 @@ docker build . --tag tickets-app
 
 docker run -it -p8081:8081 tickets-app:latest 
 
-
+Authentication
+==============
+admin/admin
